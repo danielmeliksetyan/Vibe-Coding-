@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed: High-Performance Accessible Website</title>
+    <style>
+        /* CSS remains mostly the same, added focus utility for accessibility */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Success Message Styling */
+        .success-box {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+            color: #155724;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        nav {
+            background: #2c3e50;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            background: #34495e;
+            outline: none;
+        }
+
+        /* Visual cue for keyboard focus */
+        .nav-link:focus {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+        }
+
+        .dropdown-toggle::after {
+            content: ' ▼';
+            font-size: 0.8em;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            min-width: 200px;
+            margin-top: 5px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            color: #333;
+            padding: 12px 20px;
+            display: block;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background: #f8f9fa;
+            outline: none;
+            background: #e2e6ea;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            line-height: 1;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #333;
+            outline: none;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background: #5568d3;
+            outline: 2px solid #333;
+            outline-offset: 2px;
+        }
+
+        .content {
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>✨ Optimized & Accessible Website</h1>
+
+        <div class="success-box">
+            <h2>✅ Fixes Applied:</h2>
+            <ul>
+                <li><strong>Memory Leaks:</strong> Resolved via Event Delegation.</li>
+                <li><strong>Global Scope:</strong> Protected via IIFE/Modules.</li>
+                <li><strong>Modal Logic:</strong> Event Bubbling checked to prevent accidental closes.</li>
+                <li><strong>Accessibility:</strong> Added ARIA attributes, Escape key support, and Focus Trapping.</li>
+            </ul>
+        </div>
+
+        <nav>
+            <ul class="nav-menu" role="menubar">
+                <li class="nav-item" role="none">
+                    <a href="#" class="nav-link" role="menuitem">Home</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#" class="nav-link dropdown-toggle" id="servicesDropdown" role="menuitem"
+                        aria-haspopup="true" aria-expanded="false">
+                        Services
+                    </a>
+                    <div class="dropdown-menu" id="servicesMenu" role="menu" aria-labelledby="servicesDropdown">
+                        <a href="#" class="dropdown-item" role="menuitem">Web Development</a>
+                        <a href="#" class="dropdown-item" role="menuitem">Mobile Apps</a>
+                        <a href="#" class="dropdown-item" role="menuitem">Consulting</a>
+                        <a href="#" class="dropdown-item" role="menuitem">Support</a>
+                    </div>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#" class="nav-link" role="menuitem">About</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#" class="nav-link" role="menuitem">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <div class="card">
+                <h3>Test the Modal</h3>
+                <p>Click the button below to open a modal window. Try closing it with the <strong>Escape</strong> key!
+                </p>
+                <button class="btn" id="openModalBtn" aria-haspopup="dialog">Open Modal</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Welcome!</h2>
+                <button class="close-btn" id="closeModalBtn" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>This is a fixed modal. You can close it by:</p>
+                <ul>
+                    <li>Clicking the X button</li>
+                    <li>Clicking the dark overlay (but not the white box!)</li>
+                    <li>Pressing the Escape key</li>
+                </ul>
+                <p style="margin-top: 10px"><a href="#" style="color: blue">Focusable link test</a> (Tab should stay
+                    inside modal)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * 🛡️ MODERN APPROACH
+         * 1. Uses DOMContentLoaded to ensure elements exist.
+         * 2. Uses Const/Let to avoid global pollution.
+         * 3. Uses Event Delegation (Single listener) for performance.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Configuration & Selectors ---
+            const DOM = {
+                dropdownToggle: document.getElementById('servicesDropdown'),
+                dropdownMenu: document.getElementById('servicesMenu'),
+                modalOverlay: document.getElementById('modalOverlay'),
+                modal: document.querySelector('.modal'),
+                openModalBtn: document.getElementById('openModalBtn'),
+                closeModalBtn: document.getElementById('closeModalBtn')
+            };
+
+            // Store the element that opened the modal to return focus later
+            let lastFocusedElement = null;
+
+            // --- Logic Controllers ---
+
+            const DropdownController = {
+                toggle: function (expandedState) {
+                    const isExpanded = expandedState === 'true';
+                    DOM.dropdownToggle.setAttribute('aria-expanded', !isExpanded);
+
+                    if (!isExpanded) {
+                        DOM.dropdownMenu.classList.add('show');
+                    } else {
+                        DOM.dropdownMenu.classList.remove('show');
+                    }
+                },
+                close: function () {
+                    DOM.dropdownToggle.setAttribute('aria-expanded', 'false');
+                    DOM.dropdownMenu.classList.remove('show');
+                }
+            };
+
+            const ModalController = {
+                open: function () {
+                    lastFocusedElement = document.activeElement; // Save focus
+                    DOM.modalOverlay.classList.add('show');
+                    DOM.modalOverlay.setAttribute('aria-hidden', 'false');
+
+                    // ACCESSIBILITY: Shift focus to close button or first input inside modal
+                    DOM.closeModalBtn.focus();
+                },
+                close: function () {
+                    DOM.modalOverlay.classList.remove('show');
+                    DOM.modalOverlay.setAttribute('aria-hidden', 'true');
+
+                    // ACCESSIBILITY: Return focus to the button that opened it
+                    if (lastFocusedElement) lastFocusedElement.focus();
+                }
+            };
+
+            // --- ⚡ EVENT DELEGATION (Fixes Memory Leak) ---
+
+            document.addEventListener('click', (e) => {
+                const target = e.target;
+
+                // 1. Dropdown Logic
+                // Using .closest() helps if the click target is an icon inside the button
+                if (target.matches('#servicesDropdown')) {
+                    e.preventDefault();
+                    DropdownController.toggle(DOM.dropdownToggle.getAttribute('aria-expanded'));
+                    return;
+                }
+
+                // Close dropdown if clicking anywhere else
+                if (!target.closest('.nav-item')) {
+                    DropdownController.close();
+                }
+
+                // 2. Modal Open Logic
+                if (target.closest('#openModalBtn')) {
+                    ModalController.open();
+                    return;
+                }
+
+                // 3. Modal Close Logic (X Button)
+                if (target.closest('#closeModalBtn')) {
+                    ModalController.close();
+                    return;
+                }
+
+                // 4. Modal Overlay Click (Fixes Click-Through Bug)
+                // We strictly check if the Target IS the overlay, not a child of it
+                if (target === DOM.modalOverlay) {
+                    ModalController.close();
+                }
+            });
+
+            // --- ⌨️ KEYBOARD ACCESSIBILITY ---
+
+            document.addEventListener('keydown', (e) => {
+                const isModalOpen = DOM.modalOverlay.classList.contains('show');
+
+                // 1. Escape Key Handler
+                if (e.key === 'Escape') {
+                    if (isModalOpen) ModalController.close();
+                    DropdownController.close();
+                }
+
+                // 2. Focus Trap (Keep focus inside modal when open)
+                if (isModalOpen && e.key === 'Tab') {
+                    // Get all focusable elements inside modal
+                    const focusableElements = DOM.modal.querySelectorAll(
+                        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    );
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+
+                    if (e.shiftKey) { // Shift + Tab (Backward)
+                        if (document.activeElement === firstElement) {
+                            e.preventDefault();
+                            lastElement.focus();
+                        }
+                    } else { // Tab (Forward)
+                        if (document.activeElement === lastElement) {
+                            e.preventDefault();
+                            firstElement.focus();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
