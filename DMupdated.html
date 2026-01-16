@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyRocket Growth - AI Landing</title>
+    <style>
+        /* 1. Variables & Reset */
+        :root {
+            /* Colors */
+            --clr-bg: #0b0f17;
+            --clr-bg-card: rgba(255, 255, 255, 0.04);
+            --clr-border: rgba(255, 255, 255, 0.08);
+            --clr-text-main: #e9eef7;
+            --clr-text-muted: #9fb0ce;
+            --clr-text-accent: #7c3aed;
+            --clr-primary-grad: linear-gradient(90deg, #7c3aed, #06b6d4);
+            --clr-white: #ffffff;
+
+            /* Status Colors */
+            --clr-success: #86efac;
+            --clr-warning: #fde68a;
+            --clr-danger: #fda4af;
+
+            /* Spacing */
+            --gap-sm: 8px;
+            --gap-md: 16px;
+            --gap-lg: 32px;
+            --section-pad: 60px;
+
+            /* Components */
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 18px;
+            --radius-pill: 999px;
+        }
+
+        /* Light Mode Override */
+        body.light-mode {
+            --clr-bg: #f8fafc;
+            --clr-bg-card: #ffffff;
+            --clr-border: #e2e8f0;
+            --clr-text-main: #0f172a;
+            --clr-text-muted: #64748b;
+        }
+
+        body.light-mode .card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--clr-bg);
+            color: var(--clr-text-main);
+            line-height: 1.5;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* 2. Typography */
+        h1,
+        h2,
+        h3 {
+            margin: 0 0 10px 0;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.25rem);
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .text-accent {
+            color: var(--clr-text-accent);
+        }
+
+        .text-muted {
+            color: var(--clr-text-muted);
+        }
+
+        .text-tiny {
+            font-size: 0.75rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-success {
+            color: var(--clr-success);
+        }
+
+        .text-warning {
+            color: var(--clr-warning);
+        }
+
+        .text-danger {
+            color: var(--clr-danger);
+        }
+
+        /* 3. Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--gap-md);
+        }
+
+        .section {
+            padding-bottom: var(--section-pad);
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--gap-md);
+        }
+
+        .grid--3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flex-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        /* Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--clr-text-accent);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* 4. Components */
+        /* Header */
+        .top-banner {
+            background: #111827;
+            color: #cbd5e1;
+            padding: 8px 16px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            background: rgba(11, 15, 23, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 9;
+            padding: 18px 0;
+            border-bottom: 1px solid transparent;
+        }
+
+        body.light-mode .site-header {
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .site-header__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo__icon {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background: #7c3aed;
+            margin-right: 8px;
+        }
+
+        .logo__suffix {
+            opacity: 0.7;
+            margin-left: 4px;
+        }
+
+        .nav__list {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav__link {
+            color: #cfe3ff;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav__link:hover {
+            color: var(--clr-white);
+        }
+
+        body.light-mode .nav__link {
+            color: #475569;
+        }
+
+        body.light-mode .nav__link:hover {
+            color: #000;
+        }
+
+        .nav__link--active {
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: #1a2233;
+            color: var(--clr-white);
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.1s;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn--primary {
+            background: var(--clr-primary-grad);
+            border: 0;
+        }
+
+        .btn--shadow {
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+        }
+
+        .btn--secondary {
+            background: var(--clr-bg-card);
+            border: 1px solid var(--clr-border);
+            color: var(--clr-text-main);
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--clr-bg-card);
+            border: 1px solid var(--clr-border);
+            padding: 18px;
+            border-radius: var(--radius-md);
+        }
+
+        .card--inner {
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .card--featured {
+            border-color: rgba(124, 58, 237, 0.5);
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.12);
+        }
+
+        .card__title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Pills & Badges */
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: var(--radius-pill);
+            background: rgba(124, 58, 237, 0.15);
+            border: 1px solid rgba(124, 58, 237, 0.35);
+            color: #d9c7ff;
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 8px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-pill);
+            background: rgba(255, 255, 255, 0.03);
+            font-size: 14px;
+        }
+
+        .pill--tiny {
+            font-size: 12px;
+            padding: 4px 8px;
+        }
+
+        .highlight {
+            background: rgba(6, 182, 212, 0.18);
+            padding: 0 8px;
+            border-radius: 10px;
+        }
+
+        /* Hero Specifics */
+        .hero {
+            padding: 60px 0 40px;
+        }
+
+        .hero__grid {
+            display: flex;
+            gap: var(--gap-lg);
+            align-items: flex-start;
+        }
+
+        .hero__content {
+            flex: 1;
+        }
+
+        .hero__visual {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero__desc {
+            max-width: 520px;
+            color: var(--clr-text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0 20px;
+        }
+
+        .hero__actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+            align-items: center;
+        }
+
+        .hero__social-proof {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Dashboard Card */
+        .dashboard-card {
+            text-align: left;
+            width: 100%;
+            max-width: 460px;
+            margin-left: auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-grid {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .dashboard-chart {
+            margin-top: 16px;
+        }
+
+        .chart-container {
+            height: 110px;
+            border-radius: 14px;
+            border: 1px solid var(--clr-border);
+            background: linear-gradient(180deg, rgba(6, 182, 212, 0.16), rgba(124, 58, 237, 0.10));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-line {
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 70%;
+            background: linear-gradient(90deg, rgba(6, 182, 212, 0), rgba(6, 182, 212, 0.2), rgba(124, 58, 237, 0.35));
+            clip-path: polygon(0 70%, 10% 55%, 20% 62%, 30% 45%, 40% 56%, 50% 40%, 60% 52%, 70% 32%, 80% 40%, 90% 25%, 100% 30%, 100% 100%, 0 100%);
+        }
+
+        .chart-note {
+            position: absolute;
+            left: 12px;
+            top: 10px;
+        }
+
+        .dashboard-actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        /* Split Layout (Proof) */
+        .split-layout {
+            display: flex;
+            gap: var(--gap-lg);
+            padding-bottom: 40px;
+        }
+
+        .split-layout__visual {
+            flex: 1;
+        }
+
+        .split-layout__content {
+            flex: 1;
+        }
+
+        .fake-image {
+            min-height: 260px;
+            border-radius: 16px;
+            position: relative;
+            background: radial-gradient(circle at 30% 30%, rgba(6, 182, 212, 0.35), transparent 45%),
+                radial-gradient(circle at 70% 50%, rgba(124, 58, 237, 0.35), transparent 50%),
+                rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .absolute-tl {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+        }
+
+        .absolute-br {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+        }
+
+        .fake-image__text {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            font-size: 12px;
+            color: var(--clr-text-muted);
+            max-width: 220px;
+            margin: 0;
+        }
+
+        .feature-list {
+            padding-left: 18px;
+            color: var(--clr-text-muted);
+            list-style-type: disc;
+        }
+
+        .feature-list li {
+            margin: 10px 0;
+        }
+
+        /* Pricing */
+        .price {
+            font-size: 34px;
+            font-weight: 900;
+            margin-top: 8px;
+        }
+
+        .price-features {
+            margin-top: 12px;
+        }
+
+        .price-features li {
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        /* FAQ */
+        .faq-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .faq-summary {
+            font-weight: 700;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .faq-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-content {
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        /* CTA Box */
+        .cta-box {
+            padding: 28px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, rgba(124, 58, 237, 0.15), rgba(6, 182, 212, 0.08));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cta-title {
+            font-size: 22px;
+            margin: 0;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        .site-footer {
+            padding: 22px 0;
+            border-top: 1px solid var(--clr-border);
+            color: var(--clr-text-muted);
+        }
+
+        .footer__inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .footer__nav a {
+            margin-right: 10px;
+            color: var(--clr-text-muted);
+            font-size: 12px;
+        }
+
+        .footer__disclaimer {
+            max-width: 420px;
+        }
+
+        /* 5. Responsive Breakpoints */
+        @media (max-width: 920px) {
+            .grid--3 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            h1 {
+                font-size: 2.75rem;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .site-header__inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .nav__list {
+                overflow-x: auto;
+                max-width: 100%;
+                padding-bottom: 5px;
+            }
+
+            .hero__grid,
+            .split-layout,
+            .cta-box {
+                flex-direction: column;
+            }
+
+            .hero__visual {
+                text-align: left;
+                width: 100%;
+            }
+
+            .dashboard-card {
+                margin-left: 0;
+            }
+
+            .grid--3 {
+                grid-template-columns: 1fr;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <div class="top-banner" role="alert">
+        🚀 Limited time: “Pro” is <strong>50% off</strong> if you sign up today.
+    </div>
+
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="#" class="logo">
+                <span class="logo__icon"></span>
+                SkyRocket <span class="logo__suffix">Growth</span>
+            </a>
+
+            <nav class="nav" aria-label="Main Navigation">
+                <ul class="nav__list">
+                    <li><a href="#features" class="nav__link">Features</a></li>
+                    <li><a href="#proof" class="nav__link">Proof</a></li>
+                    <li><a href="#pricing" class="nav__link">Pricing</a></li>
+                    <li><a href="#faq" class="nav__link">FAQ</a></li>
+                    <li><a href="#contact" class="nav__link nav__link--active">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button type="button" class="btn btn--secondary js-login-btn">Login</button>
+                <a href="#pricing" class="btn btn--primary">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container hero__grid">
+                <div class="hero__content">
+                    <div class="badge">AI-generated landing page v0.1</div>
+                    <h1 id="hero-title">
+                        Grow your startup <span class="text-accent">fast</span> with
+                        <span class="highlight">automation</span>
+                    </h1>
+                    <p class="hero__desc">
+                        We combine <strong>analytics</strong>, <strong>email campaigns</strong>, and <strong>AI
+                            copy</strong> so your team ships more.
+                        This page was generated by an AI agent with one vague prompt.
+                    </p>
+
+                    <div class="hero__actions">
+                        <button class="btn btn--primary btn--shadow js-signup-btn">Start Free Trial</button>
+                        <a href="#proof" class="btn btn--secondary">See results</a>
+                        <span class="pill pill--tiny">No credit card*</span>
+                        <span class="pill pill--tiny">Cancel anytime</span>
+                    </div>
+
+                    <div class="hero__social-proof">
+                        <div class="pill pill--tiny">⭐ 4.9 rating (totally real)</div>
+                        <div class="pill pill--tiny">Used by 12,000+ teams (maybe)</div>
+                        <div class="pill pill--tiny">SOC2-ready (trust us)</div>
+                    </div>
+                </div>
+
+                <div class="hero__visual">
+                    <article class="card dashboard-card">
+                        <header class="dashboard-header">
+                            <h2 class="card__title">Live Dashboard</h2>
+                            <div class="text-tiny text-muted">updated: <span id="timeNow">...</span></div>
+                        </header>
+
+                        <div class="dashboard-grid">
+                            <div class="card card--inner">
+                                <div class="text-tiny text-muted">Visitors</div>
+                                <div class="stat-value" id="visitors">12,431</div>
+                                <div class="text-tiny text-success">+12% this week</div>
+                            </div>
+                            <div class="card card--inner">
+                                <div class="text-tiny text-muted">Signups</div>
+                                <div class="stat-value" id="signups">1,204</div>
+                                <div class="text-tiny text-success">+8% this week</div>
+                            </div>
+                            <div class="card card--inner">
+                                <div class="text-tiny text-muted">Conversion</div>
+                                <div class="stat-value" id="conv">9.6%</div>
+                                <div class="text-tiny text-warning">stable</div>
+                            </div>
+                            <div class="card card--inner">
+                                <div class="text-tiny text-muted">Revenue</div>
+                                <div class="stat-value" id="rev">$9,880</div>
+                                <div class="text-tiny text-danger">-2% today</div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-chart">
+                            <div class="text-tiny text-muted mb-2">Growth line</div>
+                            <div class="chart-container">
+                                <div id="chart-line" class="chart-line"></div>
+                                <div class="chart-note text-tiny text-muted">looks fancy, not accurate</div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-actions">
+                            <button class="btn btn--secondary js-refresh-btn">Refresh Stats</button>
+                            <button class="btn btn--secondary js-theme-toggle">Toggle Theme</button>
+                            <div class="text-tiny text-muted">JS is clean now.</div>
+                        </div>
+                    </article>
+                    <div class="text-tiny text-center mt-2 text-muted">
+                        * no credit card unless we forget to remove this text.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <div class="grid grid--3">
+                    <article class="card">
+                        <h3 class="card__title">AI Copy Generator</h3>
+                        <p class="card__text">Writes landing page text in 2 seconds. Sometimes it repeats itself. It is
+                            what it is.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Campaign Scheduler</h3>
+                        <p class="card__text">Automates emails and push notifications. CSS naming conventions are now
+                            strictly enforced.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Smart Segments</h3>
+                        <p class="card__text">Segments users by behavior. Or by whatever your AI guessed your users do.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Analytics</h3>
+                        <p class="card__text">Charts and dashboards. Includes meaningless metrics like “Hype Score”.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Templates</h3>
+                        <p class="card__text">200+ templates. Half of them are duplicates with slightly different
+                            padding.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Integrations</h3>
+                        <p class="card__text">Connects to stuff. Sometimes. Depends on your vibes and moon phase.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="proof" class="section">
+            <div class="container split-layout">
+                <div class="split-layout__visual">
+                    <div class="fake-image">
+                        <span class="pill pill--tiny absolute-tl">pseudo-image</span>
+                        <span class="pill pill--tiny absolute-br">gradient blob</span>
+                        <p class="fake-image__text">This is a div pretending to be an image.</p>
+                    </div>
+                </div>
+                <div class="split-layout__content">
+                    <h2 class="section-title">Real proof (kinda)</h2>
+                    <p class="text-muted mb-4">
+                        Teams report higher engagement after switching to our platform. The numbers below are generated
+                        in JS, not from actual data.
+                    </p>
+
+                    <div class="flex-group mb-4">
+                        <span class="pill">+31% open rate</span>
+                        <span class="pill">-18% churn</span>
+                        <span class="pill">+2.4x conversions</span>
+                    </div>
+
+                    <ul class="feature-list">
+                        <li>Launch in hours, not weeks</li>
+                        <li>Stop copy-pasting styles across 90 divs</li>
+                        <li>Make your landing page readable by humans</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Loved by founders (allegedly)</h2>
+                <div class="grid grid--3">
+                    <figure class="card">
+                        <blockquote class="quote">“We increased growth by 999% in 3 minutes. Incredible product. 10/10.”
+                        </blockquote>
+                        <figcaption class="person">Alex, CEO of Probably Real Inc.</figcaption>
+                    </figure>
+                    <figure class="card">
+                        <blockquote class="quote">“The dashboard is so shiny that investors stopped asking questions.”
+                        </blockquote>
+                        <figcaption class="person">Jamie, Head of Vibes</figcaption>
+                    </figure>
+                    <figure class="card">
+                        <blockquote class="quote">“Finally, a tool that writes my marketing copy AND my bugs.”
+                        </blockquote>
+                        <figcaption class="person">Sam, Founder</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="section">
+            <div class="container">
+                <h2 class="section-title">Pricing</h2>
+                <div class="grid grid--3">
+                    <div class="card">
+                        <h3 class="card__title">Starter</h3>
+                        <div class="price">$0</div>
+                        <div class="text-tiny text-muted">for testing the waters</div>
+                        <ul class="price-features">
+                            <li>✓ 1 project</li>
+                            <li>✓ Basic analytics</li>
+                            <li>✕ Hope and prayers</li>
+                        </ul>
+                        <button class="btn btn--primary full-width js-signup-btn">Choose</button>
+                    </div>
+
+                    <div class="card card--featured">
+                        <div class="flex-between">
+                            <h3 class="card__title">Pro</h3>
+                            <span class="pill pill--tiny">most popular</span>
+                        </div>
+                        <div class="price">$29</div>
+                        <div class="text-tiny text-muted">per month</div>
+                        <ul class="price-features">
+                            <li>✓ 10 projects</li>
+                            <li>✓ Automation</li>
+                            <li>✓ AI copy</li>
+                            <li>✓ “Hype Score”</li>
+                        </ul>
+                        <button class="btn btn--primary full-width js-signup-btn">Choose</button>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">Enterprise</h3>
+                        <div class="price">$??</div>
+                        <div class="text-tiny text-muted">talk to sales</div>
+                        <ul class="price-features">
+                            <li>✓ Unlimited</li>
+                            <li>✓ Dedicated support</li>
+                            <li>✓ Custom “AI”</li>
+                        </ul>
+                        <button class="btn btn--secondary full-width js-sales-btn">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section">
+            <div class="container">
+                <h2 class="section-title">FAQ</h2>
+                <div class="faq-group">
+                    <details class="card faq-item">
+                        <summary class="faq-summary">Is this real?</summary>
+                        <div class="faq-content text-muted">The UI is real. The claims are... motivational.</div>
+                    </details>
+                    <details class="card faq-item">
+                        <summary class="faq-summary">Do you support refunds?</summary>
+                        <div class="faq-content text-muted">Yes. Also no. Depends on the weather. (This is a demo.)
+                        </div>
+                    </details>
+                    <details class="card faq-item">
+                        <summary class="faq-summary">Why is the code messy?</summary>
+                        <div class="faq-content text-muted">It was messy. Now it's clean, semantic, and organized.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="cta-box">
+                    <div class="cta-content">
+                        <h2 class="cta-title">Ready to ship a cleaner landing page?</h2>
+                        <p class="text-muted">Refactor this mess into semantic HTML + clean CSS without changing the
+                            design too much.</p>
+                    </div>
+                    <div class="cta-actions">
+                        <button class="btn btn--secondary js-scroll-top">Back to top</button>
+                        <button class="btn btn--primary js-signup-btn">Start now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="site-footer">
+        <div class="container footer__inner">
+            <div class="footer__brand">
+                <div class="logo-text">SkyRocket Growth</div>
+                <div class="text-tiny text-muted">© <span id="year"></span> All rights reserved.</div>
+            </div>
+            <nav class="footer__nav">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="footer__disclaimer text-tiny text-muted">
+                Disclaimer: This page was intentionally messy. It has been refactored for best practices.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Dynamic Year
+            const yearEl = document.getElementById("year");
+            if (yearEl) yearEl.innerText = new Date().getFullYear();
+
+            // 2. Smooth Scrolling to Anchor
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // 3. Scroll to Top
+            const toTopBtn = document.querySelector(".js-scroll-top");
+            if (toTopBtn) {
+                toTopBtn.addEventListener("click", () => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+            }
+
+            // 4. Fake Signup Logic
+            const signupBtns = document.querySelectorAll(".js-signup-btn");
+            signupBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const originalText = btn.innerText;
+                    btn.innerText = "Processing...";
+                    btn.disabled = true;
+
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                        alert("Signup flow not implemented. This is a demo landing page.");
+                    }, 800);
+                });
+            });
+
+            // 5. Sales Button
+            const salesBtn = document.querySelector(".js-sales-btn");
+            if (salesBtn) {
+                salesBtn.addEventListener("click", () => alert('sales is sleeping'));
+            }
+
+            // 6. Login Button
+            const loginBtn = document.querySelector(".js-login-btn");
+            if (loginBtn) {
+                loginBtn.addEventListener("click", () => alert('login not implemented'));
+            }
+
+            // 7. Stats Randomizer (Controlled)
+            function randomizeStats() {
+                const els = {
+                    visitors: document.getElementById("visitors"),
+                    signups: document.getElementById("signups"),
+                    conv: document.getElementById("conv"),
+                    rev: document.getElementById("rev"),
+                    time: document.getElementById("timeNow")
+                };
+
+                if (els.visitors) els.visitors.innerText = (10000 + Math.floor(Math.random() * 9000)).toLocaleString();
+                if (els.signups) els.signups.innerText = (800 + Math.floor(Math.random() * 900)).toLocaleString();
+                if (els.conv) els.conv.innerText = (Math.random() * 8 + 4).toFixed(1) + "%";
+                if (els.rev) els.rev.innerText = "$" + (Math.floor(Math.random() * 15000)).toLocaleString();
+                if (els.time) els.time.innerText = new Date().toLocaleTimeString();
+            }
+
+            // Initial load
+            randomizeStats();
+
+            // Manual Refresh
+            const refreshBtn = document.querySelector(".js-refresh-btn");
+            if (refreshBtn) {
+                refreshBtn.addEventListener("click", randomizeStats);
+            }
+
+            // 8. Theme Toggle (Class based)
+            const themeBtn = document.querySelector(".js-theme-toggle");
+            if (themeBtn) {
+                themeBtn.addEventListener("click", () => {
+                    document.body.classList.toggle("light-mode");
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
